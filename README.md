@@ -4,7 +4,7 @@
 sudo apt install -y git
 
 git config --global user.name "{ username }"
-git config --global user.email "{ mailaddles }"
+git config --global user.email "{ mail address }"
 
 bash goenv.sh
 
