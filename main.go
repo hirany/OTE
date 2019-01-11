@@ -25,7 +25,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("templates/index.html")
 	checkError(err, "indexHandler")
 
-	err = t.Execute(w, "")
+	err = t.Execute(w, "str")
 	checkError(err, "execute")
 
 }
