@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+type UserInfo struct {
+	Name string
+}
+
 func main() {
 
 	server := http.Server{
@@ -23,10 +27,13 @@ func main() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("templates/index.html")
-	checkError(err, "indexHandler")
+	checkError(err, "indexHandler_parsefile")
 
-	err = t.Execute(w, "str")
-	checkError(err, "execute")
+	var user UserInfo
+	user.Name = "megane"
+
+	err = t.Execute(w, user)
+	checkError(err, "indexHandler_execute")
 
 }
 
