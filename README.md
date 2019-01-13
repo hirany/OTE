@@ -1,5 +1,6 @@
 # OTE
 
+## 開発環境の構築 golangのインストールとアップデート
 ```bash
 sudo apt install -y git
 
