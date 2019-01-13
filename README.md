@@ -18,4 +18,6 @@ bash goupdate.sh
 source ~/.bashrc
 mkdir -p $GOPATH/src/github.com/{ username }
 cd $GOPATH/src/github.com/{ username }
+
+bash goget.sh
 ```
