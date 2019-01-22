@@ -18,7 +18,9 @@ func main() {
 		Handler: nil,
 	}
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/editors", editor)
 
 	server.ListenAndServe()
 
@@ -26,7 +28,7 @@ func main() {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
-	t, err := template.ParseFiles("templates/index.html")
+	t, err := template.ParseFiles("templates/layout.html", "templates/index.html")
 	checkError(err, "indexHandler_parsefile")
 
 	var user UserInfo
@@ -34,6 +36,19 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = t.Execute(w, user)
 	checkError(err, "indexHandler_execute")
+
+}
+
+func editor(w http.ResponseWriter, r *http.Request) {
+
+	t, err := template.ParseFiles("templates/layout.html", "templates/editor.html")
+	checkError(err, "editor_parsefile")
+
+	var user UserInfo
+	user.Name = "megane"
+
+	err = t.Execute(w, user)
+	checkError(err, "editor_execute")
 
 }
 
