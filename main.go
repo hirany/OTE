@@ -1,15 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
+	"log"
 	"net/http"
-	"os"
 )
-
-type UserInfo struct {
-	Name string
-}
 
 func main() {
 
@@ -18,9 +13,13 @@ func main() {
 		Handler: nil,
 	}
 
+	file := newFile()
+
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
-	http.HandleFunc("/", indexHandler)
+	http.Handle("/room", file)
 	http.HandleFunc("/editors", editor)
+	http.HandleFunc("/", indexHandler)
+	go file.run()
 
 	server.ListenAndServe()
 
@@ -31,10 +30,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("templates/layout.html", "templates/index.html")
 	checkError(err, "indexHandler_parsefile")
 
-	var user UserInfo
-	user.Name = "megane"
-
-	err = t.Execute(w, user)
+	err = t.Execute(w, "")
 	checkError(err, "indexHandler_execute")
 
 }
@@ -44,17 +40,13 @@ func editor(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("templates/layout.html", "templates/editor.html")
 	checkError(err, "editor_parsefile")
 
-	var user UserInfo
-	user.Name = "megane"
-
-	err = t.Execute(w, user)
+	err = t.Execute(w, "file name")
 	checkError(err, "editor_execute")
 
 }
 
 func checkError(err error, s string) {
 	if err != nil {
-		fmt.Println(s)
-		os.Exit(1)
+		log.Fatal(s)
 	}
 }
