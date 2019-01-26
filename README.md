@@ -33,4 +33,4 @@ windows
 ```powershell, cmd
 go build
 ./OTE.exe
-``
+```
