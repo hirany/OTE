@@ -21,3 +21,16 @@ cd $GOPATH/src/github.com/{ username }
 
 bash goget.sh
 ```
+
+## 実行方法
+
+linux
+```bash
+go build
+./OTE
+```
+windows
+```powershell, cmd
+go build
+./OTE.exe
+``
