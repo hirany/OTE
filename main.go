@@ -4,7 +4,12 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
+
+func init() {
+	os.Mkdir("fileData", 755)
+}
 
 func main() {
 

@@ -23,7 +23,7 @@ func (c *client) read() {
 		if err == nil {
 			c.file.forward <- msg
 			fmt.Printf("%s\n", msg)
-			ioutil.WriteFile("data/filename.txt", msg, perm)
+			ioutil.WriteFile("fileData/filename.txt", msg, perm)
 		} else {
 			break
 		}
