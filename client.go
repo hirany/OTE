@@ -2,8 +2,13 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 
 	"github.com/gorilla/websocket"
+)
+
+const (
+	perm = 755
 )
 
 type client struct {
@@ -18,6 +23,7 @@ func (c *client) read() {
 		if err == nil {
 			c.file.forward <- msg
 			fmt.Printf("%s\n", msg)
+			ioutil.WriteFile("data/filename.txt", msg, perm)
 		} else {
 			break
 		}

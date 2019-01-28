@@ -36,7 +36,7 @@ func newFile() *file {
 func (file *file) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	socket, err := upgrader.Upgrade(w, req, nil)
 	if err != nil {
-		log.Fatal("ServeHTTP_upgrade")
+		log.Fatal(err)
 		return
 	}
 	client := &client{

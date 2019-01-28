@@ -28,25 +28,25 @@ func main() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("templates/layout.html", "templates/index.html")
-	checkError(err, "indexHandler_parsefile")
+	checkError(err)
 
 	err = t.Execute(w, "")
-	checkError(err, "indexHandler_execute")
+	checkError(err)
 
 }
 
 func editor(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("templates/layout.html", "templates/editor.html")
-	checkError(err, "editor_parsefile")
+	checkError(err)
 
 	err = t.Execute(w, "file name")
-	checkError(err, "editor_execute")
+	checkError(err)
 
 }
 
-func checkError(err error, s string) {
+func checkError(err error) {
 	if err != nil {
-		log.Fatal(s)
+		log.Fatal(err)
 	}
 }
