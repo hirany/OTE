@@ -1,6 +1,6 @@
 function roadEditor() {
 	// const save = document.getElementById('save')
-	var connection = new WebSocket("ws://127.0.0.1:8080/room");
+	var connection = new WebSocket("ws://127.0.0.1:8080/room/");
 	let editor = ace.edit("editor");
 	editor.setTheme("ace/theme/monokai");
 	editor.setFontSize(14);
