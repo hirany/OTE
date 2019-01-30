@@ -1,5 +1,5 @@
 function roadEditor() {
-	// const save = document.getElementById('save')
+	const save = document.getElementById('save_button')
 	var connection = new WebSocket("ws://127.0.0.1:8080/room");
 	let editor = ace.edit("editor");
 	editor.setTheme("ace/theme/monokai");
@@ -7,9 +7,9 @@ function roadEditor() {
 	editor.getSession().setMode("ace/mode/html");
 	editor.getSession().setUseWrapMode(true); //折り返し
 	editor.getSession().setTabSize(2); //タブ幅
-	// save.addEventListener("click", () => {
-		// saveFile(editor)
-	// })
+	save.addEventListener("click", () => {
+		saveFile(editor)
+	})
 	editor.addEventListener("change", () => {
 		connection.send(editor.getValue());
 	})
@@ -20,4 +20,7 @@ function roadEditor() {
 	}
 }
 
+function saveFile(editor){
+	console.log(editor.getValue())
+}
 window.addEventListener("load", () => roadEditor())
