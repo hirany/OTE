@@ -21,6 +21,16 @@ function roadEditor() {
 }
 
 function saveFile(editor){
-	console.log(editor.getValue())
-}
+	let file_name = prompt() //本番環境ではあらかじめ決められたファイル名で保存するようにする?
+	let blob = new Blob([editor.getValue()], { type: 'text/plain'  });
+	let a = Object.assign(document.createElement('a'), {
+		href: URL.createObjectURL(blob),
+		target: '_blank',
+		download: file_name
+	});
+	document.body.appendChild(a);
+	a.click();
+	a.parentNode.removeChild(a);
+};
+
 window.addEventListener("load", () => roadEditor())
